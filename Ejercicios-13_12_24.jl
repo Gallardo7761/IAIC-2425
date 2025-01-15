@@ -1,6 +1,16 @@
 using Pkg
 Pkg.activate(".")
-#Pkg.instantiate()
+
+# Función auxiliar para borrar la terminal REPL
+function clc()
+    if Sys.iswindows()
+        return read(run(`powershell cls`), String)
+    elseif Sys.isunix()
+        return read(run(`clear`), String)
+    elseif Sys.islinux()
+        return read(run(`printf "\033c"`), String)
+    end
+end
 
 using Random
 using CSV
